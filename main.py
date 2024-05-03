@@ -28,11 +28,11 @@ main_html = """
 
 
 	      numero = getRndInteger(0, 10);
-	      letra = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+	      letra = ["Niebla","Roca","Hojas","Arena","Nubes"];
 	      random = Math.floor(Math.random() * letra.length);
 	      aleatorio = letra[random];
 
-	      document.getElementById('mensaje').innerHTML  = 'Escriba en kanji el dia ' + aleatorio;
+	      document.getElementById('mensaje').innerHTML  = 'Escribe el simbolo de la aldea escondida entre ' + aleatorio;
 	      document.getElementById('numero').value = aleatorio;
 
 	      $('#myCanvas').mousedown(function (e) {
@@ -123,7 +123,7 @@ main_html = """
 	    </div>
 	    
 	    <div id="imagen" align="center">
-      		<img src="https://marcjapan.files.wordpress.com/2007/02/kanji2x.JPG" width="300"/>
+      		<img src="https://www.shutterstock.com/image-vector/bandung-indonesia-december-6-2023-600w-2397323497.jpg" width="300"/>
     	    </div>
 	</body>
 </html>
@@ -138,7 +138,7 @@ def upload():
     try:
         img_data = request.form.get('myImage').replace("data:image/png;base64,", "")
         aleatorio = request.form.get('numero')
-        folder_id = '1SAexmaIUn4_SlQUiPLWjDuZcZiSiMuzy'  # Reemplaza con la ID de tu carpeta en Google Drive
+        folder_id = '1bjhGYXx9opwIgZj4FO95we5TpBep92S7'  # Reemplaza con la ID de tu carpeta en Google Drive
         file_name = aleatorio + '_image.png'
         with tempfile.NamedTemporaryFile(delete = False, mode = "w+b", suffix='.png', dir=str(aleatorio)) as fh:
             fh.write(base64.b64decode(img_data))
@@ -152,7 +152,7 @@ def upload():
 @app.route('/prepare', methods=['GET'])
 def prepare_dataset():
     images = []
-    d = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+    d = ["Niebla","Roca","Hojas","Arena","Nubes"]
     digits = []
     for digit in d:
       filelist = glob.glob('{}/*.png'.format(digit))
@@ -165,7 +165,7 @@ def prepare_dataset():
     digits = np.concatenate(digits)
     np.save('X.npy', images)
     np.save('y.npy', digits)
-    return "EL DATA SET HA SIDO PROCESADO :3"
+    return "Data set procesado exitosamente"
 
 @app.route('/X.npy', methods=['GET'])
 def download_X():
@@ -176,7 +176,7 @@ def download_y():
     
 if __name__ == "__main__":
     
-    digits = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+    digits = ["Niebla","Roca","Hojas","Arena","Nubes"]
     for d in digits:
         if not os.path.exists(str(d)):
             os.mkdir(str(d))

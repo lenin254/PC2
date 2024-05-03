@@ -1,5 +1,1 @@
-# PREDICCION 
-
-Participantes: 
-- Pool Lennin Salvatierra Arevalo
-
+# letras_uni
